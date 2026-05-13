@@ -87,3 +87,7 @@ Persistable.load_all()
 # Create and save user object
 userOne = User('userOne', username='john_doe', email='john@example.com')
 userOne.save_to_json()
+
+# Create and save book object
+bookOne = Book('bookOne', title='1984', author='Orwell')
+bookOne.save_to_json()
