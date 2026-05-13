@@ -86,3 +86,4 @@ Persistable.load_all()
 
 # Create and save user object
 userOne = User('userOne', username='john_doe', email='john@example.com')
+userOne.save_to_json()
