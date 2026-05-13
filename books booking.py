@@ -66,3 +66,10 @@ class Persistable:
         else:
             with open(filename, 'w') as f:
                 json.dump(current_data, f, indent=4)
+
+class Book(Persistable):
+    """Book class inheriting from Persistable."""
+    def __init__(self, name, title, author, **kwargs):
+        super().__init__(name, **kwargs)
+        self.title = title
+        self.author = author
