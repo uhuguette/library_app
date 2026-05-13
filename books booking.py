@@ -80,3 +80,6 @@ class User(Persistable):
         super().__init__(name, **kwargs)
         self.username = username
         self.email = email
+
+# Initialize system and load existing objects
+Persistable.load_all()
