@@ -73,3 +73,10 @@ class Book(Persistable):
         super().__init__(name, **kwargs)
         self.title = title
         self.author = author
+
+class User(Persistable):
+    """User class inheriting from Persistable."""
+    def __init__(self, name, username, email, **kwargs):
+        super().__init__(name, **kwargs)
+        self.username = username
+        self.email = email
