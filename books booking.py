@@ -83,3 +83,6 @@ class User(Persistable):
 
 # Initialize system and load existing objects
 Persistable.load_all()
+
+# Create and save user object
+userOne = User('userOne', username='john_doe', email='john@example.com')
