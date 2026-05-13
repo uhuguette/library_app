@@ -47,3 +47,22 @@ class Persistable:
         for k, v in kwargs.items():
             setattr(self, k, v)
         self.__class__.objects.append(self)
+
+    def save_to_json(self):
+        """Save object to JSON file with update detection."""
+        filename = self.name + '.json'
+        current_data = self.__dict__.copy()
+        current_data['type'] = self.__class__.__name__  
+        for k in list(current_data.keys()):
+            if isinstance(current_data[k], datetime):
+                current_data[k] = current_data[k].isoformat()
+        
+        if os.path.exists(filename):
+            with open(filename, 'r') as f:
+                previous_data = json.load(f)
+            if previous_data != current_data:
+                with open(filename, 'w') as f:
+                    json.dump(current_data, f, indent=4)
+        else:
+            with open(filename, 'w') as f:
+                json.dump(current_data, f, indent=4)
