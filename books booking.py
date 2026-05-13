@@ -4,12 +4,11 @@ from datetime import datetime
 import uuid
 
 class Persistable:
-    """Base class for persistent objects with shared attributes."""
     objects = []
 
     @classmethod
     def load_all(cls):
-        """Load all objects from JSON files in the current directory."""
+       
         cls.objects = []
         for filename in os.listdir('.'):
             if filename.endswith('.json'):
@@ -29,7 +28,7 @@ class Persistable:
                     print(f"Error loading {filename}: {e}")
 
     def __init__(self, name, id=None, **kwargs):
-        """Initialize object with name, id, and timestamps."""
+       
         self.name = name
         if id is None:
             self.id = str(uuid.uuid4())
@@ -49,7 +48,6 @@ class Persistable:
         self.__class__.objects.append(self)
 
     def save_to_json(self):
-        """Save object to JSON file with update detection."""
         filename = self.name + '.json'
         current_data = self.__dict__.copy()
         current_data['type'] = self.__class__.__name__  
@@ -68,26 +66,23 @@ class Persistable:
                 json.dump(current_data, f, indent=4)
 
 class Book(Persistable):
-    """Book class inheriting from Persistable."""
     def __init__(self, name, title, author, **kwargs):
         super().__init__(name, **kwargs)
         self.title = title
         self.author = author
 
 class User(Persistable):
-    """User class inheriting from Persistable."""
     def __init__(self, name, username, email, **kwargs):
         super().__init__(name, **kwargs)
         self.username = username
         self.email = email
 
-# Initialize system and load existing objects
 Persistable.load_all()
 
-# Create and save user object
+
 userOne = User('userOne', username='john_doe', email='john@example.com')
 userOne.save_to_json()
 
-# Create and save book object
+
 bookOne = Book('bookOne', title='1984', author='Orwell')
 bookOne.save_to_json()
